@@ -1,0 +1,33 @@
+#:kivy 1.0
+#:import label kivy.uix.label
+#:import la kivy.adapters.listadapter
+
+MusicWidget:
+    songs: songs
+    
+    Button:
+        size_hint: 0.1, 1
+        text: "Volume"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        Button:
+            size_hint: 1, 0.1
+            text: "search" 
+        
+        ListView:
+            id: songs
+            adapter:
+                la.ListAdapter(
+                data=['hello', 'file'],
+                cls=label.Label) 
+        
+        Button:
+            size_hint: 1, 0.2
+            text: "control" 
+            on_press: root.add_song('Hello')
+
+    Button:
+        size_hint: 0.1, 1
+        text: "Power" 
