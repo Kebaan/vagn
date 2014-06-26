@@ -1,9 +1,28 @@
 #:kivy 1.0
 #:import label kivy.uix.label
+#:import lw kivy.uix.listview
 #:import la kivy.adapters.listadapter
+#:import sla kivy.adapters.simplelistadapter
 
-MusicWidget:
-    songs: songs
+[SongListItem@BoxLayout]:
+    height: ctx.height
+
+    Label:
+        size_hint_x: 0.6
+        text: ctx.text
+
+    Button:
+        size_hint_x: 0.2
+        text: "up"
+        on_press: app.move_song(ctx.id) 
+    
+    Button:
+        size_hint_x: 0.2
+        text: "rm"
+        on_press: app.remove_song(ctx.id) 
+
+<MusicWidget>:
+    song_list: song_list
     
     Button:
         size_hint: 0.1, 1
@@ -17,17 +36,26 @@ MusicWidget:
             text: "search" 
         
         ListView:
-            id: songs
-            adapter:
-                la.ListAdapter(
-                data=['hello', 'file'],
-                cls=label.Label) 
+            id: song_list
         
-        Button:
+        BoxLayout:
             size_hint: 1, 0.2
             text: "control" 
-            on_press: root.add_song('Hello')
 
+            Button:
+                text: "OMW"
+                on_press: app.add_song('On My Way')
+
+            Button:
+                text: "SSS"
+                on_press: app.add_song('3xS')
+
+            Button:
+                text: "Play"
+
+            Button:
+                text: "Exit"
+                on_press: app.exit()
     Button:
         size_hint: 0.1, 1
         text: "Power" 
